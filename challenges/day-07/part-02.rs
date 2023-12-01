@@ -1,9 +1,9 @@
 use std::{fs, path::Path};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-  let input = fs::read_to_string(Path::new("./challenges/day-4/input.txt"))?;
+  let input = fs::read_to_string(Path::new("./challenges/day-07/input.txt"))?;
 
-  println!("Hello from day 4 part 1");
+  println!("Hello from day 7 part 2");
   println!("Input file: {}", &input);
 
   Ok(())
