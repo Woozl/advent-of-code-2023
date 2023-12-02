@@ -7,5 +7,254 @@ edition = "2021"
 
 [dependencies]
 glob = "0.3.1"
+regex = "1.10.2"
 serde = { version = "1.0.193", features = ["derive"] }
 serde_json = "1.0.108"
+
+[[bin]]
+name = "1-1"
+path = "./challenges/day-01/part-01.rs"
+
+[[bin]]
+name = "1-2"
+path = "./challenges/day-01/part-02.rs"
+
+[[bin]]
+name = "2-1"
+path = "./challenges/day-02/part-01.rs"
+
+[[bin]]
+name = "2-2"
+path = "./challenges/day-02/part-02.rs"
+
+[[bin]]
+name = "3-1"
+path = "./challenges/day-03/part-01.rs"
+
+[[bin]]
+name = "3-2"
+path = "./challenges/day-03/part-02.rs"
+
+[[bin]]
+name = "4-1"
+path = "./challenges/day-04/part-01.rs"
+
+[[bin]]
+name = "4-2"
+path = "./challenges/day-04/part-02.rs"
+
+[[bin]]
+name = "5-1"
+path = "./challenges/day-05/part-01.rs"
+
+[[bin]]
+name = "5-2"
+path = "./challenges/day-05/part-02.rs"
+
+[[bin]]
+name = "6-1"
+path = "./challenges/day-06/part-01.rs"
+
+[[bin]]
+name = "6-2"
+path = "./challenges/day-06/part-02.rs"
+
+[[bin]]
+name = "7-1"
+path = "./challenges/day-07/part-01.rs"
+
+[[bin]]
+name = "7-2"
+path = "./challenges/day-07/part-02.rs"
+
+[[bin]]
+name = "8-1"
+path = "./challenges/day-08/part-01.rs"
+
+[[bin]]
+name = "8-2"
+path = "./challenges/day-08/part-02.rs"
+
+[[bin]]
+name = "9-1"
+path = "./challenges/day-09/part-01.rs"
+
+[[bin]]
+name = "9-2"
+path = "./challenges/day-09/part-02.rs"
+
+[[bin]]
+name = "10-1"
+path = "./challenges/day-10/part-01.rs"
+
+[[bin]]
+name = "10-2"
+path = "./challenges/day-10/part-02.rs"
+
+[[bin]]
+name = "11-1"
+path = "./challenges/day-11/part-01.rs"
+
+[[bin]]
+name = "11-2"
+path = "./challenges/day-11/part-02.rs"
+
+[[bin]]
+name = "12-1"
+path = "./challenges/day-12/part-01.rs"
+
+[[bin]]
+name = "12-2"
+path = "./challenges/day-12/part-02.rs"
+
+[[bin]]
+name = "13-1"
+path = "./challenges/day-13/part-01.rs"
+
+[[bin]]
+name = "13-2"
+path = "./challenges/day-13/part-02.rs"
+
+[[bin]]
+name = "14-1"
+path = "./challenges/day-14/part-01.rs"
+
+[[bin]]
+name = "14-2"
+path = "./challenges/day-14/part-02.rs"
+
+[[bin]]
+name = "15-1"
+path = "./challenges/day-15/part-01.rs"
+
+[[bin]]
+name = "15-2"
+path = "./challenges/day-15/part-02.rs"
+
+[[bin]]
+name = "16-1"
+path = "./challenges/day-16/part-01.rs"
+
+[[bin]]
+name = "16-2"
+path = "./challenges/day-16/part-02.rs"
+
+[[bin]]
+name = "17-1"
+path = "./challenges/day-17/part-01.rs"
+
+[[bin]]
+name = "17-2"
+path = "./challenges/day-17/part-02.rs"
+
+[[bin]]
+name = "18-1"
+path = "./challenges/day-18/part-01.rs"
+
+[[bin]]
+name = "18-2"
+path = "./challenges/day-18/part-02.rs"
+
+[[bin]]
+name = "19-1"
+path = "./challenges/day-19/part-01.rs"
+
+[[bin]]
+name = "19-2"
+path = "./challenges/day-19/part-02.rs"
+
+[[bin]]
+name = "20-1"
+path = "./challenges/day-20/part-01.rs"
+
+[[bin]]
+name = "20-2"
+path = "./challenges/day-20/part-02.rs"
+
+[[bin]]
+name = "21-1"
+path = "./challenges/day-21/part-01.rs"
+
+[[bin]]
+name = "21-2"
+path = "./challenges/day-21/part-02.rs"
+
+[[bin]]
+name = "22-1"
+path = "./challenges/day-22/part-01.rs"
+
+[[bin]]
+name = "22-2"
+path = "./challenges/day-22/part-02.rs"
+
+[[bin]]
+name = "23-1"
+path = "./challenges/day-23/part-01.rs"
+
+[[bin]]
+name = "23-2"
+path = "./challenges/day-23/part-02.rs"
+
+[[bin]]
+name = "24-1"
+path = "./challenges/day-24/part-01.rs"
+
+[[bin]]
+name = "24-2"
+path = "./challenges/day-24/part-02.rs"
+
+[[bin]]
+name = "25-1"
+path = "./challenges/day-25/part-01.rs"
+
+[[bin]]
+name = "25-2"
+path = "./challenges/day-25/part-02.rs"
+
+[[bin]]
+name = "26-1"
+path = "./challenges/day-26/part-01.rs"
+
+[[bin]]
+name = "26-2"
+path = "./challenges/day-26/part-02.rs"
+
+[[bin]]
+name = "27-1"
+path = "./challenges/day-27/part-01.rs"
+
+[[bin]]
+name = "27-2"
+path = "./challenges/day-27/part-02.rs"
+
+[[bin]]
+name = "28-1"
+path = "./challenges/day-28/part-01.rs"
+
+[[bin]]
+name = "28-2"
+path = "./challenges/day-28/part-02.rs"
+
+[[bin]]
+name = "29-1"
+path = "./challenges/day-29/part-01.rs"
+
+[[bin]]
+name = "29-2"
+path = "./challenges/day-29/part-02.rs"
+
+[[bin]]
+name = "30-1"
+path = "./challenges/day-30/part-01.rs"
+
+[[bin]]
+name = "30-2"
+path = "./challenges/day-30/part-02.rs"
+
+[[bin]]
+name = "31-1"
+path = "./challenges/day-31/part-01.rs"
+
+[[bin]]
+name = "31-2"
+path = "./challenges/day-31/part-02.rs"

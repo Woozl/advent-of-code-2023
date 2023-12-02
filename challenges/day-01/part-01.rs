@@ -1,7 +1,7 @@
 use std::{fs, path::Path};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let input = fs::read_to_string(Path::new("./challenges/day-1/input.txt"))?;
+    let input = fs::read_to_string(Path::new("./challenges/day-01/input.txt"))?;
 
     let mut calibration: usize = 0;
 
@@ -12,8 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if char.is_ascii_digit() {
                 if first_digit == 'x' {
                     first_digit = char;
-                }
-                else {
+                } else {
                     second_digit = char;
                 }
 
