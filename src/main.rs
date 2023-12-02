@@ -1,23 +1,6 @@
-use std::{env, process::Command};
-
 fn main() {
-    let args: Vec<String> = env::args().collect();
-
-    if args.len() != 2 {
-        eprintln!("{}", MESSAGE);
-        std::process::exit(1);
-    }
-
-    let binary_name = &args[1];
-
-    let status = Command::new(format!("target/debug/{}", binary_name))
-        .status()
-        .expect("Failed to execute process");
-
-    if !status.success() {
-        eprintln!("Error executing the specified binary");
-        std::process::exit(1);
-    }
+    eprintln!("{MESSAGE}");
+    std::process::exit(1);
 }
 
 const MESSAGE: &'static str = r#"
