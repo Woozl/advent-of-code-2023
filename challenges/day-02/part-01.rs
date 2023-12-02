@@ -51,9 +51,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
-        if over {
-            continue;
-        } else {
+        if !over {
             sum += game_id
         }
     }
