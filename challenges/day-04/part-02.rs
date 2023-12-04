@@ -35,7 +35,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    println!("Sum: {}", card_copies.iter().fold(0, |acc, c| acc + c));
+    println!("Sum: {}", card_copies.iter().sum::<usize>());
 
     Ok(())
 }
