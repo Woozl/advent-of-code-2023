@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Create 31 folders
-for ((i = 1; i <= 31; i++)); do
+for ((i = 1; i <= 25; i++)); do
   # Create folder with the name day-i
   folder_name=$(printf "day-%02d" $i)
   mkdir -p "$folder_name"
