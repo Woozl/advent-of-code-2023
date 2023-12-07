@@ -56,8 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     let mut sum: usize = 0;
-    for (i, (hand, bid, class, score)) in scored_hands.iter().enumerate() {
-        println!("{}\t-\t{}\t-\t{}\t-\t{}", hand, bid, class, score);
+    for (i, (_, bid, _, _)) in scored_hands.iter().enumerate() {
         sum += (i + 1) * bid;
     }
     
