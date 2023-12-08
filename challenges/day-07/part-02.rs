@@ -60,8 +60,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         };
 
-        println!("{hand}\t-\t{hand_classification}");
-
         (hand, bid, hand_classification, hand_score)
     }).collect::<Vec<(&str, usize, usize, usize)>>();
 
