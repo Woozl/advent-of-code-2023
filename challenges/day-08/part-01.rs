@@ -23,12 +23,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut num_steps: usize = 0;
     let mut turns = turn_string.chars().cycle();
     while current_location != String::from("ZZZ") {
-        let crossroad = map.get(&current_location).unwrap();
+        let crossroad = map.get(&current_location).unwrap().clone();
         let turn = turns.next().unwrap();
-        current_location = if turn == 'L' { crossroad.0.clone() } else { crossroad.1.clone() };
+        current_location = if turn == 'L' {
+            crossroad.0
+        } else {
+            crossroad.1
+        };
         num_steps += 1;
     }
-    
+
     println!("Number of steps: {num_steps}");
 
     Ok(())
