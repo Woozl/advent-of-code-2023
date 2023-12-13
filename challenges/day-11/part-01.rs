@@ -76,9 +76,3 @@ fn expand_image(image: Vec<Vec<char>>, expansion_factor: usize) -> Vec<Vec<char>
 
     expanded_image
 }
-
-fn print_image(image: Vec<Vec<char>>) {
-    for row in image.iter() {
-        println!("{}", row.iter().collect::<String>())
-    }
-}
