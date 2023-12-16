@@ -56,7 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ('J', (1, 0)) => (0, -1),  // entering J pipe from W
                 ('J', (0, 1)) => (0, 1),   // entering J pipe from N
                 ('|', _) => prev_step_dir, // vertical pipes always travel the same direction they were entered
-                _ => (0, 0)                // every other pipe/entrance dir configuration isn't counted for a +x raycast
+                _ => (0, 0), // every other pipe/entrance dir configuration isn't counted for a +x raycast
             };
 
             loop_directions.insert(current_loc, loop_direction);
@@ -90,11 +90,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // starting value. In other words, we need to figure out which pipe piece the 'S' cell
         // is acting as.
         if current_loc == starting_loc {
-            println!("{:?} -> {:?}", prev_step_dir, first_step_dir);
-
             // this is in effect the same match statement as above, except we're determining
-            // the winding direction using the input and output directions rather than the
-            // character, since the 'S' cell can act as a wildcard.
+            // the winding direction using both the input and output directions rather than
+            // the character + input dir, since the 'S' cell can act as a wildcard.
             let direction: (isize, isize) = match (prev_step_dir, first_step_dir) {
                 ((0, 1), (1, 0)) => (0, 1),    // 'L' piece, S in E out -> S winding
                 ((-1, 0), (0, -1)) => (0, -1), // 'L' piece, W in N out -> N winding
@@ -102,41 +100,61 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ((0, 1), (-1, 0)) => (0, 1),   // 'J' piece, S in W out -> S winding
                 ((0, -1), (0, -1)) => (0, -1), // '|' piece travelling north
                 ((0, 1), (0, 1)) => (0, 1),    // '|' piece travelling south
-                _ => (0, 0)                    // other piece configurations have no impact on winding calculation
+                _ => (0, 0), // other piece configurations have no impact on winding calculation
             };
 
             loop_directions.insert(current_loc, direction);
-            
+
             break;
         }
     }
 
-    print_winding_graph(&grid, &loop_directions);
+    let num = count_cells_in_loop(&grid, &loop_directions);
+
+    println!("Num cells in loop: {}", num);
 
     Ok(())
 }
 
-fn print_winding_graph(grid: &Vec<Vec<char>>, loop_directions: &HashMap<(usize, usize), (isize, isize)>) {
+fn count_cells_in_loop(
+    grid: &Vec<Vec<char>>,
+    loop_directions: &HashMap<(usize, usize), (isize, isize)>,
+) -> usize {
+    let mut cells_in_loop: usize = 0;
     for ri in 0..grid.len() {
         for ci in 0..grid[ri].len() {
-            let is_dir = loop_directions.get(&(ci, ri));
-            if let Some(dir) = is_dir {
-                let arrow = match *dir {
-                    (0, 0) => 'o',
-                    (0, -1) => '↑',
-                    (0, 1) => '↓',
-                    (1, 0) => '→',
-                    (-1, 0) => '←',
-                    _ => '#'
-                };
-                print!("{arrow}");
-            }
-            else {
-                print!(".");
+            // cell is on the loop, no need to check it
+            if loop_directions.get(&(ci, ri)).is_some() {
+                continue;
+            };
+
+            // raycast from this cell all the way to the right side of the grid
+            // if a N direction is hit (0, -1), add 1 to winding count (wc)
+            // if a S direction is hit (0, 1), subtract 1 from wc
+            // no other cells affect wc
+            // when ray hits right side, if wc == 0, cell is in the loop
+
+            let wc: isize = (ci..grid[ri].len()).fold(0, |wc, x| {
+                if let Some(winding) = loop_directions.get(&(x, ri)) {
+                    wc + match winding {
+                        (0, -1) => 1, // N
+                        (0, 1) => -1, // S
+
+                        // there may be (0, 0) dir vectors representing piece configurations
+                        // that have no effect on the winding, so these can be ignored by adding 0
+                        _ => 0,
+                    }
+                } else {
+                    wc
+                }
+            });
+
+            if wc != 0 {
+                cells_in_loop += 1;
             }
         }
-        println!("");
     }
+    cells_in_loop
 }
 
 fn opposite(dir: (isize, isize)) -> (isize, isize) {
