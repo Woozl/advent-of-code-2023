@@ -20,7 +20,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let clear_col_indicies: Vec<usize> = (0..image[0].len())
         .filter(|&col_i| image.iter().all(|row| row[col_i] == '.'))
         .collect();
-    
+
     // find all galaxy (x, y) coordinates
     let mut galaxies: Vec<(usize, usize)> = vec![];
     for (row_i, row) in image.iter().enumerate() {
@@ -28,7 +28,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if *char == '#' {
                 let num_clear_rows = clear_row_indicies.iter().filter(|&&i| i < row_i).count();
                 let num_clear_cols = clear_col_indicies.iter().filter(|&&i| i < col_i).count();
-                
+
                 // calculate the actual galaxy coordinates based on how
                 // many clear rows and columns are before row_i and col_i
                 let expanded_x = col_i + (num_clear_cols * EXPANSION_FACTOR) - num_clear_cols;
