@@ -3,8 +3,8 @@ use std::{collections::HashMap, fs, path::Path};
 // Point in Polygon, raycast winding count method
 // from this paper: https://web.archive.org/web/20210302180821/http://geomalgorithms.com/a03-_inclusion.html
 //
-// To handle cases where the ray (+x direction in this implementation), follow these rules
-// for counting from the paper
+// To handle cases where the ray (+x direction in this implementation) is parallel and
+// and intersecting a line of the polygon, follow these rules for counting from the paper:
 //
 // Edge Crossing Rules:
 //   1. an upward edge includes its starting endpoint, and excludes its final endpoint;
@@ -45,6 +45,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut current_loc = starting_loc;
     let mut prev_step_dir: (isize, isize) = (0, 0);
+    let mut first_step_dir: (isize, isize) = (0, 0);
     loop {
         let current_char = grid[current_loc.1][current_loc.0];
 
@@ -74,6 +75,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let connecting_dir = opposite(*dir);
                 if let Some(connections) = char_connections.get(&next_char) {
                     if let Some(_) = connections.iter().find(|&&c| c == connecting_dir) {
+                        if first_step_dir == (0, 0) {
+                            first_step_dir = *dir;
+                        }
                         current_loc = (x as usize, y as usize);
                         prev_step_dir = *dir;
                         break;
@@ -82,8 +86,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
 
-        // TODO, set the proper direction map for S point
+        // once we've completed the loop, we need to determine the winding direction for the
+        // starting value. In other words, we need to figure out which pipe piece the 'S' cell
+        // is acting as.
         if current_loc == starting_loc {
+            println!("{:?} -> {:?}", prev_step_dir, first_step_dir);
+
+            // this is in effect the same match statement as above, except we're determining
+            // the winding direction using the input and output directions rather than the
+            // character, since the 'S' cell can act as a wildcard.
+            let direction: (isize, isize) = match (prev_step_dir, first_step_dir) {
+                ((0, 1), (1, 0)) => (0, 1),    // 'L' piece, S in E out -> S winding
+                ((-1, 0), (0, -1)) => (0, -1), // 'L' piece, W in N out -> N winding
+                ((1, 0), (0, -1)) => (0, -1),  // 'J' piece, E in N out -> N winding
+                ((0, 1), (-1, 0)) => (0, 1),   // 'J' piece, S in W out -> S winding
+                ((0, -1), (0, -1)) => (0, -1), // '|' piece travelling north
+                ((0, 1), (0, 1)) => (0, 1),    // '|' piece travelling south
+                _ => (0, 0)                    // other piece configurations have no impact on winding calculation
+            };
+
+            loop_directions.insert(current_loc, direction);
+            
             break;
         }
     }
