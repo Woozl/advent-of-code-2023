@@ -15,7 +15,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         (springs, broken_ranges)
     });
 
-    row.for_each(| v | println!("{:?}", v));
+    row.for_each(|v| println!("{:?}", v));
 
     Ok(())
 }

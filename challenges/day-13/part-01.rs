@@ -49,7 +49,10 @@ fn find_mirror(strings: &Vec<String>) -> Option<usize> {
             let mut left = stack_pointer as isize;
             let mut right = i as isize;
 
-            while left >= 0 && right < strings.len() as isize && strings[left as usize] == strings[right as usize] {
+            while left >= 0
+                && right < strings.len() as isize
+                && strings[left as usize] == strings[right as usize]
+            {
                 right += 1;
                 left -= 1;
             }
