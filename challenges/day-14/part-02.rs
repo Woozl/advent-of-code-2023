@@ -1,7 +1,6 @@
-use std::{fs, path::Path, collections::HashMap};
+use std::{collections::HashMap, fs, path::Path};
 
 const NUM_CYCLES: usize = 1_000_000_000;
-
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input = fs::read_to_string(Path::new("./challenges/day-14/input.txt"))?;
@@ -13,7 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut current_cycle: usize = 1;
     while current_cycle < NUM_CYCLES {
         cycle(&mut grid);
-        
+
         if let Some(&cached_length) = cache.get(&grid.clone()) {
             let length = current_cycle - cached_length;
             let remaining_cycles = (NUM_CYCLES - current_cycle) % length;
@@ -22,7 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
             break;
         }
-        
+
         cache.insert(grid.clone(), current_cycle);
         current_cycle += 1;
     }
@@ -33,7 +32,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-enum Direction { North, West, South, East }
+enum Direction {
+    North,
+    West,
+    South,
+    East,
+}
 
 fn cycle(grid: &mut Vec<Vec<char>>) {
     tilt(grid, Direction::North);
@@ -57,7 +61,7 @@ fn tilt(grid: &mut Vec<Vec<char>>, direction: Direction) {
                     }
                 }
             }
-        },
+        }
         Direction::South => {
             for ri in (0..grid.len()).rev() {
                 for ci in 0..grid[0].len() {
@@ -71,7 +75,7 @@ fn tilt(grid: &mut Vec<Vec<char>>, direction: Direction) {
                     }
                 }
             }
-        },
+        }
         Direction::West => {
             for ci in 0..grid[0].len() {
                 for ri in 0..grid.len() {
@@ -85,7 +89,7 @@ fn tilt(grid: &mut Vec<Vec<char>>, direction: Direction) {
                     }
                 }
             }
-        },
+        }
         Direction::East => {
             for ci in (0..grid[0].len()).rev() {
                 for ri in 0..grid.len() {
@@ -99,7 +103,7 @@ fn tilt(grid: &mut Vec<Vec<char>>, direction: Direction) {
                     }
                 }
             }
-        },
+        }
     }
 }
 
